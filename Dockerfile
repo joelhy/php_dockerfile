@@ -1,5 +1,5 @@
 # Base image, official docker PHP image
-FROM php:latest
+FROM php:apache
 
 # change sources.list to faster mirror
 #ADD sources.list /etc/apt/sources.list
@@ -32,5 +32,9 @@ RUN pecl install memcached \
 # Install xdebug extension
 RUN pecl install xdebug
 
-VOLUME ["/usr/local/etc"]
+RUN a2enmod rewrite
 
+#VOLUME ["/usr/local/etc"]
+#VOLUME ["/etc/apache2"]
+
+EXPOSE 80

@@ -1,5 +1,5 @@
 # Base image, official docker PHP image
-FROM php:latest
+FROM php:fpm
 
 # change sources.list to faster mirror
 #ADD sources.list /etc/apt/sources.list
@@ -34,3 +34,4 @@ RUN pecl install xdebug
 
 VOLUME ["/usr/local/etc"]
 
+EXPOSE 9000

@@ -1,4 +1,4 @@
-### PHP 5.6 CLI with extensions enabled
+### PHP 5.6 FPM with extensions enabled
 
 * Based on official docker PHP image
 * with following extra extensions enabled:

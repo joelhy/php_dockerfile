@@ -26,7 +26,7 @@ RUN pecl install redis \
     && docker-php-ext-enable redis
 
 # Install memcached extension
-RUN pecl install memcached \
+RUN pecl install memcached-2.2.0 \
     && docker-php-ext-enable memcached
 
 # Install xdebug extension

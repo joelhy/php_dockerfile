@@ -1,4 +1,4 @@
-### PHP 7 CLI with extensions enabled
+### PHP 7 Apache with extensions enabled
 
 * Based on official docker PHP image
 * with following extra extensions enabled:

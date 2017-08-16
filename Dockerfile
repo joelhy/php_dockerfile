@@ -32,5 +32,4 @@ RUN pecl install memcached \
 # Install xdebug extension
 RUN pecl install xdebug
 
-VOLUME ["/usr/local/etc"]
-
+#VOLUME ["/usr/local/etc"]

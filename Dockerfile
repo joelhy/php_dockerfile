@@ -2,7 +2,7 @@
 FROM php:latest
 
 # change sources.list to faster mirror
-ADD sources.list /etc/apt/sources.list
+#ADD sources.list /etc/apt/sources.list
 
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -28,6 +28,9 @@ RUN pecl install redis \
 # Install memcached extension
 RUN pecl install memcached \
     && docker-php-ext-enable memcached
+
+# Install xdebug extension
+RUN pecl install xdebug
 
 VOLUME ["/usr/local/etc"]
 

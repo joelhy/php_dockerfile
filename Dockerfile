@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install basic extensions
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-        && docker-php-ext-install -j$(nproc) gd iconv intl mbstring mcrypt mysqli pdo_mysql zip
+        && docker-php-ext-install -j$(nproc) gd iconv intl mbstring mcrypt mysql mysqli pdo_mysql zip
 
 # Install redis extension
 RUN pecl install redis \

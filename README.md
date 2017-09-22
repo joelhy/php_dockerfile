@@ -12,3 +12,4 @@
     * pdo_mysql
     * redis
     * zip
+    * soap

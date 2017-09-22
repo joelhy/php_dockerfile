@@ -13,13 +13,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libmcrypt-dev \
   libmemcached-dev \
   libpng12-dev \
-  zlib1g-dev
+  zlib1g-dev \
+  libxml2-dev php-soap
 
 # zlib1g-dev libicu-dev g++ for intl dependencies
 
 # Install basic extensions
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-        && docker-php-ext-install -j$(nproc) gd iconv intl mbstring mcrypt mysql mysqli pdo_mysql zip
+        && docker-php-ext-install -j$(nproc) gd iconv intl mbstring mcrypt mysql mysqli pdo_mysql zip soap
 
 # Install redis extension
 RUN pecl install redis \

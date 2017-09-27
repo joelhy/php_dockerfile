@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libmemcached-dev \
   libpng12-dev \
   zlib1g-dev \
-  libxml2-dev php-soap
+  libxml2-dev php-soap \
+  libssl-dev
 
 # zlib1g-dev libicu-dev g++ for intl dependencies
 
@@ -32,6 +33,11 @@ RUN pecl install memcached \
 
 # Install xdebug extension
 RUN pecl install xdebug
+
+# Install mongodb extension
+RUN pecl install mongodb \
+    && docker-php-ext-install bcmath \
+    && docker-php-ext-enable mongodb
 
 RUN a2enmod rewrite
 

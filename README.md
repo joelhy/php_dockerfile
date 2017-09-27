@@ -13,3 +13,4 @@
     * redis
     * zip
     * soap
+    * mongodb

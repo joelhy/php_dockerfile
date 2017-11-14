@@ -14,3 +14,4 @@
     * zip
     * soap
     * mongodb
+    * exif

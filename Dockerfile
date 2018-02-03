@@ -1,12 +1,12 @@
 # Base image, official docker PHP alpine image
-FROM php:alpine
+FROM php:fpm-alpine
 
-# change to faster mirror
-RUN  echo > /etc/apk/repositories \
-&& sed -i '1i\http://mirrors.ustc.edu.cn/alpine/v3.6/main/' /etc/apk/repositories \
-&& sed -i '1i\http://mirrors.ustc.edu.cn/alpine/v3.6/community/' /etc/apk/repositories \
-&& sed -i '1i\http://mirrors.aliyun.com/alpine/v3.6/main/' /etc/apk/repositories \
-&& sed -i '1i\http://mirrors.aliyun.com/alpine/v3.6/community/' /etc/apk/repositories
+# # change to faster mirror
+# RUN  echo > /etc/apk/repositories \
+# && sed -i '1i\http://mirrors.ustc.edu.cn/alpine/v3.6/main/' /etc/apk/repositories \
+# && sed -i '1i\http://mirrors.ustc.edu.cn/alpine/v3.6/community/' /etc/apk/repositories \
+# && sed -i '1i\http://mirrors.aliyun.com/alpine/v3.6/main/' /etc/apk/repositories \
+# && sed -i '1i\http://mirrors.aliyun.com/alpine/v3.6/community/' /etc/apk/repositories
 
 RUN apk update --no-cache \
     && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS icu-dev libxml2-dev \

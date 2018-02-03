@@ -1,42 +1,38 @@
-# Base image, official docker PHP image
-FROM php:latest
+# Base image, official docker PHP alpine image
+FROM php:alpine
 
-# change sources.list to faster mirror
-#ADD sources.list /etc/apt/sources.list
+# change to faster mirror
+RUN  echo > /etc/apk/repositories \
+&& sed -i '1i\http://mirrors.ustc.edu.cn/alpine/v3.6/main/' /etc/apk/repositories \
+&& sed -i '1i\http://mirrors.ustc.edu.cn/alpine/v3.6/community/' /etc/apk/repositories \
+&& sed -i '1i\http://mirrors.aliyun.com/alpine/v3.6/main/' /etc/apk/repositories \
+&& sed -i '1i\http://mirrors.aliyun.com/alpine/v3.6/community/' /etc/apk/repositories
 
-# Install dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  g++ \
-  libfreetype6-dev \
-  libicu-dev \
-  libjpeg62-turbo-dev \
-  libmcrypt-dev \
-  libmemcached-dev \
-  libpng12-dev \
-  zlib1g-dev \
-  libxml2-dev php-soap \
-  libssl-dev
-
-# zlib1g-dev libicu-dev g++ for intl dependencies
-
-# Install basic extensions
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-        && docker-php-ext-install -j$(nproc) gd iconv intl mbstring mcrypt mysqli pdo_mysql zip soap exif
-
-# Install redis extension
-RUN pecl install redis \
-    && docker-php-ext-enable redis
-
-# Install memcached extension
-RUN pecl install memcached \
-    && docker-php-ext-enable memcached
-
-# Install xdebug extension
-RUN pecl install xdebug
-
-# Install mongodb extension
-RUN pecl install mongodb \
-    && docker-php-ext-install bcmath \
-    && docker-php-ext-enable mongodb
-
-#VOLUME ["/usr/local/etc"]
+RUN apk update --no-cache \
+    && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS icu-dev libxml2-dev \
+        libmcrypt-dev libmemcached-dev cyrus-sasl-dev zlib-dev openssl-dev \
+    # install gd
+    && ( \
+        apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev \
+        && docker-php-ext-configure gd \
+            --with-gd \
+            --with-freetype-dir=/usr/include/ \
+            --with-png-dir=/usr/include/ \
+            --with-jpeg-dir=/usr/include/ \
+        && NPROC=$(getconf _NPROCESSORS_ONLN) \
+        && docker-php-ext-install -j${NPROC} gd \
+        && apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev \
+    ) \
+  # install core extensions
+  && docker-php-ext-install exif iconv intl mysqli opcache pdo_mysql soap zip \
+  # install pecl extensions
+  && pecl install mcrypt-1.0.1 && docker-php-ext-enable mcrypt \
+  && pecl install redis && docker-php-ext-enable redis \
+  && pecl update-channels \
+  && echo no | pecl install memcached && docker-php-ext-enable memcached \
+  && pecl install mongodb && docker-php-ext-enable mongodb \
+  && pecl install xdebug && docker-php-ext-enable xdebug \
+  # clean up
+  && apk del --no-cache .build-deps \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/apk/* \
+       /usr/share/doc/* /name/usr/share/man/* /usr/share/info/*

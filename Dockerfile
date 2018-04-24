@@ -11,8 +11,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libicu-dev \
   libjpeg62-turbo-dev \
   libmcrypt-dev \
-  libmemcached-dev \
-  libpng12-dev \
+  libsasl2-dev libmemcached-dev \
+  libpng-dev \
   zlib1g-dev \
   libxml2-dev \
   libssl-dev
@@ -21,7 +21,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install basic extensions
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-        && docker-php-ext-install -j$(nproc) gd iconv intl mbstring mcrypt mysqli pdo_mysql zip soap exif
+        && docker-php-ext-install -j$(nproc) gd iconv intl mbstring mysqli pdo_mysql zip soap exif
+
+# Install mcrypt extension
+RUN pecl install mcrypt-1.0.1 \
+    && docker-php-ext-enable mcrypt
 
 # Install redis extension
 RUN pecl install redis \

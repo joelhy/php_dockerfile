@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libmemcached-dev \
   libpng12-dev \
   zlib1g-dev \
-  libxml2-dev php-soap \
+  libxml2-dev \
   libssl-dev
 
 # zlib1g-dev libicu-dev g++ for intl dependencies

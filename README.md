@@ -3,6 +3,7 @@
 * Based on official docker PHP image
 * with following extra extensions enabled:
     * gd
+    * gmp
     * iconv
     * intl
     * mbstring

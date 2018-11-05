@@ -8,6 +8,7 @@ FROM php:apache
 RUN apt-get update && apt-get install -y --no-install-recommends \
   g++ \
   libfreetype6-dev \
+  libgmp-dev \
   libicu-dev \
   libjpeg62-turbo-dev \
   libmcrypt-dev \

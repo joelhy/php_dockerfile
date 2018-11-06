@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libjpeg62-turbo-dev \
   libmcrypt-dev \
   libmemcached-dev \
-  libpng12-dev \
+  libpng-dev \
   zlib1g-dev \
   libxml2-dev \
   libssl-dev

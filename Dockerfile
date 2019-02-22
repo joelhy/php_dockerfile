@@ -16,7 +16,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libpng-dev \
   zlib1g-dev \
   libxml2-dev \
-  libssl-dev
+  libssl-dev \
+  libzip-dev
 
 # zlib1g-dev libicu-dev g++ for intl dependencies
 

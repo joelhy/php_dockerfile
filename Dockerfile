@@ -6,6 +6,7 @@ FROM php:5.6-apache
 
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
+  apt-utils \
   g++ \
   libfreetype6-dev \
   libgmp-dev \
@@ -17,6 +18,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   zlib1g-dev \
   libxml2-dev \
   libssl-dev
+
+# Fixing "configure: error: Unable to locate gmp.h"
+RUN ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h 
 
 # zlib1g-dev libicu-dev g++ for intl dependencies
 
@@ -34,7 +38,7 @@ RUN pecl install memcached-2.2.0 \
     && docker-php-ext-enable memcached
 
 # Install xdebug extension
-RUN pecl install xdebug
+RUN pecl install xdebug-2.5.5
 
 # Install mongodb extension
 RUN pecl install mongodb \

@@ -26,7 +26,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
         && docker-php-ext-install -j$(nproc) gd gmp iconv intl mbstring mysqli pdo_mysql zip soap exif
 
 # Install mcrypt extension
-RUN pecl install mcrypt-1.0.1 \
+RUN pecl install mcrypt-1.0.2 \
     && docker-php-ext-enable mcrypt
 
 # Install redis extension

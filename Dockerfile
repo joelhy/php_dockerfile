@@ -38,7 +38,7 @@ RUN pecl install memcached \
     && docker-php-ext-enable memcached
 
 # Install xdebug extension
-RUN pecl install xdebug
+RUN pecl install xdebug-beta
 
 # Install mongodb extension
 RUN pecl install mongodb \

@@ -26,7 +26,7 @@ RUN apk update --no-cache \
   # install core extensions
   && docker-php-ext-install exif iconv intl mysqli opcache pdo_mysql soap zip \
   # install pecl extensions
-  && pecl install mcrypt-1.0.1 && docker-php-ext-enable mcrypt \
+  && pecl install mcrypt-1.0.2 && docker-php-ext-enable mcrypt \
   && pecl install redis && docker-php-ext-enable redis \
   && pecl update-channels \
   && echo no | pecl install memcached && docker-php-ext-enable memcached \

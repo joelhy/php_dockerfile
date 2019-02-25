@@ -31,7 +31,7 @@ RUN apk update --no-cache \
   && pecl update-channels \
   && echo no | pecl install memcached && docker-php-ext-enable memcached \
   && pecl install mongodb && docker-php-ext-enable mongodb \
-  && pecl install xdebug && docker-php-ext-enable xdebug \
+  && pecl install xdebug-beta && docker-php-ext-enable xdebug \
   # clean up
   && apk del --no-cache .build-deps \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/apk/* \

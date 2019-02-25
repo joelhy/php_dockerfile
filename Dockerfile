@@ -10,7 +10,7 @@ FROM php:fpm-alpine
 
 RUN apk update --no-cache \
     && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS icu-dev libxml2-dev \
-        libmcrypt-dev libmemcached-dev cyrus-sasl-dev zlib-dev openssl-dev \
+        libmcrypt-dev libmemcached-dev cyrus-sasl-dev zlib-dev openssl-dev libzip-dev \
     # install gd
     && ( \
         apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev \

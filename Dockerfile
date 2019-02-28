@@ -1,5 +1,5 @@
 # Base image, official docker PHP image
-FROM php:7.1
+FROM php:7.2
 
 # change sources.list to faster mirror
 #ADD sources.list /etc/apt/sources.list
